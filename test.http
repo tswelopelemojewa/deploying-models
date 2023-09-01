@@ -32,7 +32,7 @@ GET http://localhost:3008/api/ucsvsr_model
 GET http://localhost:3008/api/rqd_model
 
 ###
-GET http://localhost:3008/api/Ja_model
+GET http://localhost:3008/api/Jr_model
 
 ###
 GET http://localhost:3008/api/rmr_model
