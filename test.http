@@ -1,39 +1,107 @@
-GET http://localhost:3008/api/Jn_model
 
 
 ###
-GET http://localhost:3008/api/Ja_model
 
+post http://localhost:3008/api/Jn_model
+Content-Type: application/json
+
+{
+    "description": 0
+}
+
+###
+post http://localhost:3008/api/Ja_model
+Content-Type: application/json
+
+{
+    "description": 23
+}
+
+###
+post http://localhost:3008/api/Jr_model
+Content-Type: application/json
+
+{
+    "description": 200
+}
+
+### 
+post http://localhost:3008/api/rmr_model
+Content-Type: application/json
+
+{
+    "Q_Value": 0.069333,
+    "LNQ" : -2.668829
+}
+
+###
+post http://localhost:3008/api/mus_model
+Content-Type: application/json
+
+{
+    "Q_Value": 0.123,
+    "ESR_VALUE": 1.213
+}
 
 
 ###
-GET http://localhost:3008/api/rmr_model
+post http://localhost:3008/api/Jw_model
+Content-Type: application/json
+
+{
+    "description": 10
+}
 
 ###
-GET http://localhost:3008/api/mus_model
+post http://localhost:3008/api/q_model
+Content-Type: application/json
 
-
-###
-GET http://localhost:3008/api/Jw_model
-
-###
-GET http://localhost:3008/api/q_model
-
-###
-GET http://localhost:3008/api/srf_model
-
-###
-GET http://localhost:3008/api/esr_model
+{
+    "RQD": 52.00, 
+    "Jn" : 12, 
+    "Jr" :  2.0, 
+    "Ja" : 2.0,  
+    "Jw" : 0.40
+}
 
 ###
-GET http://localhost:3008/api/ucsvsr_model
+post http://localhost:3008/api/srf_model
+Content-Type: application/json
+
+{
+    "Virgin_stress_ratio": 15.757250
+}
 
 ###
-GET http://localhost:3008/api/rqd_model
+
+# ESR not working
+post http://localhost:3008/api/esr_model
+Content-Type: application/json
+
+{
+    "ESR_Conditions": 5
+}
 
 ###
-GET http://localhost:3008/api/Jr_model
+post http://localhost:3008/api/ucsvsr_model
+Content-Type: application/json
+
+{
+
+    "GeotechDomain": 2,
+    "DepthUnderground" : 11.98,
+    "Density" : 27000.0,
+    "UCS" : 50.0
+}
 
 ###
-GET http://localhost:3008/api/rmr_model
+post http://localhost:3008/api/rqd_model
+Content-Type: application/json
+
+{
+    
+    "BoreHoleID": 6,
+    "DepthFrom": 12.5,
+    "DepthTo": 14.0
+}
 

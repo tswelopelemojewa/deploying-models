@@ -1,9 +1,7 @@
 import pickle
+import sys
 
-def predict_esr():
-    with open('models/model_LR_esr.pkl','rb') as f:
-        esr_model = pickle.load(f)
-        print(esr_model.predict([[5]]))
+with open('models/model_LR_esr.pkl','rb') as f:
+    esr_model = pickle.load(f)
+    print(esr_model.predict([[sys.argv[1]]]))
 
-# esr ends here
-predict_esr()

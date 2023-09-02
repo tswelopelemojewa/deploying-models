@@ -1,9 +1,7 @@
 import pickle
+import sys
 
-def predict_rqd():
-    with open('models/knn_regressor_rqd.pkl','rb') as f:
+with open('models/knn_regressor_rqd.pkl','rb') as f:
         rqd_model = pickle.load(f)
-        print(rqd_model.predict([[6, 12.50, 14.0]]))
+        print(rqd_model.predict([[sys.argv[1], sys.argv[2], sys.argv[3]]]))
 
-# rqd ends here
-predict_rqd()

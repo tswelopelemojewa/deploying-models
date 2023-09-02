@@ -14,50 +14,105 @@ app.use(express.static("public"));
 app.use(express.json());
 
 // Section that lists all the available price plan starts here
+app.post("/api/Jn_model", function (req, res) {
+
+    const description = req.body.description;
+
+    const options = {
+
+        args: [description]
+    }
 
 
-app.get("/api/Jn_model", function (req, res) {
     // run python code
-    PythonShell.run('python-code/jn_model.py', null).then(messages => {
+    PythonShell.run('python-code/jn_model.py', options).then(messages => {
         console.log(messages)
         res.json(
             {
                 "predictions": messages
             }
         );
-     });
+    });
 });
 
-app.get("/api/Jr_model", function (req, res) {
+
+app.post("/api/Ja_model", function (req, res) {
+
+    const description = req.body.description;
+
+    const options = {
+
+        args: [description]
+    }
+
     // run python code
-    PythonShell.run('python-code/jr_model.py', null).then(messages => {
+    PythonShell.run('python-code/ja_model.py', options).then(messages => {
         console.log(messages)
         res.json(
             {
                 "predictions": messages
             }
         );
-     });
+    });
 });
 
-app.get("/api/Jw_model", function (req, res) {
+app.post("/api/Jr_model", function (req, res) {
+
+    const description = req.body.description;
+
+    const options = {
+
+        args: [description]
+    }
+
     // run python code
-    PythonShell.run('python-code/jw_model.py', null).then(messages => {
+    PythonShell.run('python-code/jr_model.py', options).then(messages => {
         console.log(messages)
         res.json(
             {
                 "predictions": messages
             }
         );
-     });
+    });
+});
+
+app.post("/api/Jw_model", function (req, res) {
+    
+    const description = req.body.description;
+
+    const options = {
+
+        args: [description]
+    }
+
+    // run python code
+    PythonShell.run('python-code/jw_model.py', options).then(messages => {
+        console.log(messages)
+        res.json(
+            {
+                "predictions": messages
+            }
+        );
+    });
 });
 
 
  
 
-app.get("/api/q_model", function (req, res) {
+app.post("/api/q_model", function (req, res) {				
+    const RQD = req.body.RQD;
+    const Jn = req.body.Jn;
+    const Jr = req.body.Jr;
+    const Ja = req.body.Ja;
+    const Jw = req.body.Jw;
+
+    const options = {
+
+        args: [RQD, Jn, Jr, Ja, Jw]
+    }
+
     // run python code
-    PythonShell.run('python-code/q_model.py', null).then(messages => {
+    PythonShell.run('python-code/q_model.py', options).then(messages => {
         console.log(messages)
         res.json(
             {
@@ -68,9 +123,17 @@ app.get("/api/q_model", function (req, res) {
 });
 
 
-app.get("/api/srf_model", function (req, res) {
+app.post("/api/srf_model", function (req, res) {
+    
+    const Virgin_stress_ratio = req.body.Virgin_stress_ratio;
+
+    const options = {
+
+        args: [Virgin_stress_ratio]
+    }
+
     // run python code
-    PythonShell.run('python-code/srf_model.py', null).then(messages => {
+    PythonShell.run('python-code/srf_model.py', options).then(messages => {
         console.log(messages)
         res.json(
             {
@@ -81,9 +144,87 @@ app.get("/api/srf_model", function (req, res) {
 });
 
 
-app.get("/api/esr_model", function (req, res) {
+app.post("/api/esr_model", function (req, res) {
+    
+    const ESR_Conditions = req.body.ESR_Conditions;
+
+    const options = {
+
+        args: [ESR_Conditions]
+    }
+
     // run python code
-    PythonShell.run('python-code/esr_model.py', null).then(messages => {
+    PythonShell.run('python-code/esr_model.py', options).then(messages => {
+        console.log(messages)
+        res.json(
+            {
+                "predictions": messages
+            }
+        );
+    });
+});
+
+
+
+app.post("/api/ucsvsr_model", function (req, res) {
+    const GeotechDomain = req.body.GeotechDomain;
+    const DepthUnderground = req.body.DepthUnderground;
+    const Density = req.body.Density;
+    const UCS = req.body.UCS;
+
+
+
+    const options = {
+
+        args: [GeotechDomain, DepthUnderground, Density, UCS]
+    }
+
+    // run python code
+    PythonShell.run('python-code/ucsvsr_model.py', options).then(messages => {
+        console.log(messages)
+        res.json(
+            {
+                "predictions": messages
+            }
+        );
+    });
+});
+
+
+app.post("/api/rqd_model", function (req, res) {
+    
+    const BoreHoleID = req.body.BoreHoleID;
+    const DepthFrom = req.body.DepthFrom;
+    const DepthTo = req.body.DepthTo;
+
+    const options = {
+
+        args: [BoreHoleID, DepthFrom, DepthTo]
+    }
+
+    // run python code
+    PythonShell.run('python-code/rqd_model.py', options).then(messages => {
+        console.log(messages)
+        res.json(
+            {
+                "predictions": messages
+            }
+        );
+    });
+});
+
+
+app.post("/api/Ja_model", function (req, res) {
+    
+    const description = req.body.description;
+
+    const options = {
+
+        args: [description]
+    }
+
+    // run python code
+    PythonShell.run('python-code/ja_model.py', options).then(messages => {
         console.log(messages)
         res.json(
             {
@@ -95,33 +236,18 @@ app.get("/api/esr_model", function (req, res) {
 
 
 
-app.get("/api/ucsvsr_model", function (req, res) {
-    // run python code
-    PythonShell.run('python-code/ucsvsr_model.py', null).then(messages => {
-        console.log(messages)
-        res.json(
-            {
-                "predictions": messages
-            }
-        );
-     });
-});
-app.get("/api/rqd_model", function (req, res) {
-    // run python code
-    PythonShell.run('python-code/rqd_model.py', null).then(messages => {
-        console.log(messages)
-        res.json(
-            {
-                "predictions": messages
-            }
-        );
-     });
-});
+app.post("/api/rmr_model", function (req, res) {
+    		
+    const Q_Value = req.body.Q_Value;
+    const LNQ = req.body.LNQ;
 
+    const options = {
 
-app.get("/api/Ja_model", function (req, res) {
+        args: [Q_Value, LNQ]
+    }
+
     // run python code
-    PythonShell.run('python-code/ja_model.py', null).then(messages => {
+    PythonShell.run('python-code/rmr_model.py', options).then(messages => {
         console.log(messages)
         res.json(
             {
@@ -132,30 +258,25 @@ app.get("/api/Ja_model", function (req, res) {
 });
 
 
+app.post("/api/mus_model", function (req, res) {
+    
+    const Q_Value = req.body.Q_Value;
+    const ESR_VALUE = req.body.ESR_VALUE;
 
-app.get("/api/rmr_model", function (req, res) {
+    const options = {
+
+        args: [Q_Value, ESR_VALUE]
+    }
+
     // run python code
-    PythonShell.run('python-code/rmr_model.py', null).then(messages => {
+    PythonShell.run('python-code/mus_model.py', options).then(messages => {
         console.log(messages)
         res.json(
             {
                 "predictions": messages
             }
         );
-     });
-});
-
-
-app.get("/api/mus_model", function (req, res) {
-    // run python code
-    PythonShell.run('python-code/mus_model.py', null).then(messages => {
-        console.log(messages)
-        res.json(
-            {
-                "predictions": messages
-            }
-        );
-     });
+    });
 });
 
 
