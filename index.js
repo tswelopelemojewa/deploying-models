@@ -25,7 +25,9 @@ app.post("/api/Jn_model", function (req, res) {
 
 
     // run python code
-    PythonShell.run('python-code/jn_model.py', options).then(messages => {
+    PythonShell.run('python-code/jn_model.py', options)
+    
+    .then(messages => {
         console.log(messages)
         res.json(
             {

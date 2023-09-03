@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MUS API</title>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="index.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+        integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        
+    <style>
+        [x-cloak] {
+
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body class="container">
+    <main class="card" x-data="CAPSTONEWIDGET">
+
+        <!-- Login section -->
+        <!-- <section>
+            <div class="row" style="align-items: center;">
+                <div class="col l12 m12 s12">
+                    <input type="text" placeholder="Username" x-model="username">
+                    <input type="text" placeholder="Employee ID">
+                    <input type="password" placeholder="Password">
+                    <button class="waves-effect waves-light btn-small" x-on:click="login">LOGIN</button>
+
+                </div>
+                 Error Message  -->
+                <!-- <div style="text-align: center;">
+                    <span x-text="message" style="color: red;" ></span>
+
+                </div> -->
+
+            <!-- </div> -->
+        <!-- </section> --> 
+        <!-- Title section -->
+        <section>
+            
+        </section>
+
+        <!-- Tabs section -->
+
+        <section>
+            <div class="row">
+                <div class="col l12 m12 s12" style="text-align: right; background-color: blue;">
+                    <h3 x-text="title" style="text-align: center;"></h3>
+                    <button class="waves-effect waves-light btn-small" x-on:click="openHome('mainMenu')">HOME</button>
+                    <button class="waves-effect waves-light btn-small" x-on:click="openHome('contact_us')">CONTACT
+                        US</button>
+                    <button class="waves-effect waves-light btn-small" x-on:click="openHome('history')">HISTORY</button>
+                    <button class="waves-effect waves-light btn-small">logout</button>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+        <!-- Main board section divided into dashboard and computation interface -->
+
+        <section>
+            <div class="row">
+                <!-- Section for the dashboard linls -->
+                <div class="col l3 m4 s4" x-show="dashboard" style="background-color: yellowgreen;">
+                    <button x-on:click="openHome('UCS_Virgin_Stress_Ratio')"
+                        class="waves-effect waves-light btn-small">UCS/Virgin Stress Ratio</button><br><br>
+                    <button x-on:click="openHome('Jn_Description')" class="waves-effect waves-light btn-small">Jn
+                        Description</button><br><br>
+                    <button x-on:click="openHome('Jr_Description')" class="waves-effect waves-light btn-small">Jr
+                        Description</button><br><br>
+                    <button x-on:click="openHome('Ja_Description')" class="waves-effect waves-light btn-small">Ja
+                        Description</button><br><br>
+                    <button x-on:click="openHome('Jw_Description')" class="waves-effect waves-light btn-small">Jw
+                        Description</button><br><br>
+                    <button x-on:click="openHome('Rock_Quality_Designator')"
+                        class="waves-effect waves-light btn-small">Rock Quality Designator</button><br><br>
+                        <button x-on:click="openHome('Stress_Reduction_Ratio')"
+                        class="waves-effect waves-light btn-small">Stress Reduction Ratio (SRF)</button><br><br>
+                    <button x-on:click="openHome('Rock_Quality_Index_Q_Value')"
+                        class="waves-effect waves-light btn-small">Rock Quality Index (Q Value)</button><br><br>
+                    <button x-on:click="openHome('Rock_Mass_Rating')" class="waves-effect waves-light btn-small">Rock
+                        Mass Rating (RMR)</button><br><br>
+                    <button x-on:click="openHome('Excavation_Category')"
+                        class="waves-effect waves-light btn-small">Excavation Category (ESR)</button><br><br>
+                    <button x-on:click="openHome('Maximum_Unsupported_Span')"
+                        class="waves-effect waves-light btn-small">MUS</button><br><br>
+                </div>
+                <!-- section for the computation of the dashboard links -->
+                <div class="col l9 m8 s8">
+
+                    <!--1 HOME PAGE -->
+                    <div x-show="homepage">
+                        <div class="row">
+                            <div class="col l5 m8 s8">
+                                <img src="images/flowchat.PNG" width="120%" >
+                                <!-- <b> -->
+                                    <p>FLowchat diagram that depics the logical flow on the different models that would 
+                                        be used for the training and testing of the different sub-models. The multi-modal system 
+                                        had eleven sub models with their respective input been associated to their target output
+                                    </p>
+                                <!-- </b> -->
+                                
+
+                            </div>
+
+                            <div class="col l5 m8 s8">
+                                <img src="images/FINALFLOWCHT.PNG" width="140%">
+                                <p>
+                                    A visual representation of the study's methodology, aiding in the comprehension of the research process which depicts the sequential steps spaning from the importation
+                                    of the dataset into the coding platform(Jupiter notebook) for processing of the input data until the model is built and saved before being called by the
+                                    API to perform their respective computations.
+                                </p>
+                            </div>
+
+                            
+
+                        </div>
+
+                    </div>
+                    <!-- 2 UCS/Virgin Stress Ratio -->
+                    <div x-show="UCS_Virgin_Stress_Ratio" style="background-color: bisque;">
+                        <!--  -->
+                            <input type="number" placeholder="Click to Enter the value of the density e.g 27000"> Density (Kg/mm^3)
+                            <input type="number" placeholder="Click to Enter the vale of the virgin stress"> Depth to (MPa)
+                            <input type="number" placeholder="Click to Enter the run length in meters"> UCS (MPa)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="waves-effect waves-light btn-small">SUBMIT</button>
+                        <!--  -->
+
+                        <h4 style="text-align: center;">UCS/CSR PREDICTION</h4>
+                        <h5>Based on your input, the predicted UCS/VSR value is:<span></span>90%</h5>
+
+                    </div>
+
+                    <!--3 Jn Section -->
+                    <div x-show="Jn_Description" style="background-color: aqua;">
+                        
+                            <input type="number" x-model="JnDesc" placeholder="Click to Enter the Description of the joint set"> Jn Description<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="waves-effect waves-light btn-small" @click="JnDescription">SUBMIT</button>
+                        
+
+                        <h4 style="text-align: center;">Jn PREDICTION</h4>
+                        <h5>Based on your input, the predicted Jn alue is:<span x-text="JnVal"></span></h5>
+
+                    </div>
+                    <!--4 Jr Section -->
+                    <div x-show="Jr_Description" style="background-color: aquamarine;">
+                        
+                            <input type="text" placeholder="Click to Enter the Description of the joint orientation"> Jn Description<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="waves-effect waves-light btn-small">SUBMIT</button>
+                        
+
+                        <h4 style="text-align: center;">Jr PREDICTION</h4>
+                        <h5>Based on your input, the predicted Jr value is:<span></span>9</h5>
+
+                    </div>
+                    <!--5 Ja Section -->
+                    <div x-show="Ja_Description">
+                        
+                            <input type="text" placeholder="Click to Enter the Description of the joint alteration"> Ja Description<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="waves-effect waves-light btn-small">SUBMIT</button>
+                        
+
+                        <h4 style="text-align: center;">Ja PREDICTION</h4>
+                        <h5>Based on your input, the predicted Ja value is:<span></span>9</h5>
+
+                    </div>
+                    <!--6 Jw Section -->
+
+                    <div x-show="Jw_Description">
+                        
+                            <input type="text" placeholder="Click to Enter the Description of the water reduction"> Jw Description<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="waves-effect waves-light btn-small">SUBMIT</button>
+                        
+
+                        <h4 style="text-align: center;">Jw PREDICTION</h4>
+                        <h5>Based on your input, the predicted Jr value is:<span></span>9</h5>
+                    </div>
+                    <!--7 SRF Section -->
+                    <div x-show="Stress_Reduction_Ratio">
+                        
+                            <input type="number" placeholder="Click to Enter the ucs/vsr from your previous prediction"> UCS/Virgin stress ratio<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="waves-effect waves-light btn-small">SUBMIT</button>
+                        
+
+                        <h4 style="text-align: center;">SRF PREDICTION</h4>
+                        <h5>Based on your input, the predicted SRF value is:<span></span>90%</h5>
+                    </div>
+
+                    <!--8  RQD Section -->
+                    <div x-show="Rock_Quality_Designator">
+                        
+                            <input type="number" placeholder="Click to Enter the depth from in meters"> Depth From (m)
+                            <input type="number" placeholder="Click to Enter the depth to in meters"> Depth to (m)
+                            <input type="number" placeholder="Click to Enter the run length in meters"> Run length (m)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="waves-effect waves-light btn-small">SUBMIT</button>
+                        
+
+                        <h4 style="text-align: center;">RQD PREDICTION</h4>
+                        <h5>Based on your input, the predicted RQD value is:<span></span>90%</h5>
+                        
+                    </div>
+                    
+                    <!--9 Q Section -->
+                    <div x-show="Rock_Quality_Index_Q_Value" style="background-color: antiquewhite;">
+                        
+                            <input type="number" placeholder="Click to Enter the value of the Joint set number previously calculated"> Joint set number (Jn)
+                            <input type="number" placeholder="Click to Enter the value of the Joint orientation number previously calculated"> Joint orientation number (Jr)
+                            <input type="number" placeholder="Click to Enter the value of the Joint alteration number previously calculated"> Joint alteration number (Ja)
+                            <input type="number" placeholder="Click to Enter the value of the water reduction number previously calculated"> Water reduction (Jw)
+                            <input type="number" placeholder="Click to Enter the value of the stress reduction factor previously calculated"> Stress reduction factor (SRF)
+                            <input type="number" placeholder="Click to Enter the value of the RQD previously calculated"> Rock Quality Designator (RQD)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="waves-effect waves-light btn-small">SUBMIT</button>
+                        
+
+                        <h4 style="text-align: center;">Q-Value PREDICTION</h4>
+                        <h5>Based on your input, the predicted RQD value is:<span></span>90%</h5>
+
+                    </div>
+                    <!--10  RMR Section -->
+                    <div x-show="Rock_Mass_Rating">
+
+                        
+                            <input type="number" x-model="Q_Value" placeholder="Click to Enter the Q value previously predicted"> Q value<br>
+                            <input type="number" x-model="LNQ" placeholder="Click to Enter the LNQ"> LNQ value<br>
+                            
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="waves-effect waves-light btn-small" @click="RMR">SUBMIT</button>
+                        
+
+                        <h4 style="text-align: center;">RMR PREDICTION</h4>
+                        <h5>Based on your input, the predicted RMR value is:<span x-text="rmr_val"></span></h5>
+                    </div>
+                    <!--11 ESR Section -->
+                    <div x-show="Excavation_Category">
+                        
+                            <input type="text" placeholder="Click to Enter the condition for the excavation category"> Excavation category (ESR)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="waves-effect waves-light btn-small">SUBMIT</button>
+                        
+
+                        <h4 style="text-align: center;">ESR PREDICTION</h4>
+                        <h5>Based on your input, the predicted ESR value is:<span></span>90%</h5>
+
+                    </div>
+                    <!-- 12 Unsupported Span Section -->
+                    <div x-show="Maximum_Unsupported_Span">
+                        
+                            <input type="number" placeholder="Click to Enter the numerical value of excavation category from previous computation"> ESR Value
+                            <input type="number" placeholder="Click to Enter the Q-factor value previously predicted"> Q Value<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                            <button class="waves-effect waves-light btn-small">SUBMIT</button>
+                        
+
+                        <h4 style="text-align: center;">MAXIMUM UNSUPPORTED SPAN PREDICTION</h4>
+                        <h5>Based on your input, the predicted MUS value is:<span></span>90%</h5>
+
+                    </div>
+                    
+                    
+
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Contact us section -->
+        <section>
+            <div class="row" x-show="contact_us" x-cloak>
+                <!-- Fabchi -->
+                <div class="col l3 m6 s6">
+                    <img src="images/RJ.jpeg" width="75%">
+                    <b>
+                        <p>Surname: &nbsp;<span>Fabchi</span></p>
+                        <p>Initials: &nbsp;<span>RJ</span></p>
+                        <p>Email: &nbsp;<span>fabchirajoul@gmail.com</span></p>
+                        <p>Phone Number: &nbsp;<span>+2763382663</span></p>
+                        <p>Discipline: &nbsp;<span>Mining Engineer | Machine learning Expert</span></p>
+                    </b>
+
+                </div>
+
+                <div class="col l3 m6 s6">
+                    <img src="images/KLR.jpeg" width="75%">
+                    <b>
+                        <p>Surname: &nbsp;<span>LUKWAGO</span></p>
+                        <p>Initials: &nbsp;<span>RK</span></p>
+                        <p>Email: &nbsp;<span>lukwagorsaved@gmail.com</span></p>
+                        <p>Phone Number: &nbsp;<span>+27738976343</span></p>
+                        <p>Discipline: &nbsp;<span>INFORMATION TECH AND SYSTEMS | Machine learning Expert</span></p>
+                    </b>
+
+                </div>
+
+                <div class="col l3 m6 s6">
+                    <img src="images/MTE.jpeg" width="75%">
+                    <b>
+                        <p>Surname: &nbsp;<span>MOJEWA</span></p>
+                        <p>Initials: &nbsp;<span>T</span></p>
+                        <p>Email: &nbsp;<span>tswelopelemojewa@gmail.com</span></p>
+                        <p>Phone Number: &nbsp;<span>+27790985214</span></p>
+                        <p>Discipline: &nbsp;<span>ELECTRICAL ENGINEERING | Machine learning Expert</span></p>
+                    </b>
+
+                </div>
+
+                <div class="col l3 m6 s6">
+                    <img src="images/OBY.jpeg" width="75%">
+                    <b>
+                        <p>Surname: &nbsp;<span>NWOSU</span></p>
+                        <p>Initials: &nbsp;<span>OCV</span></p>
+                        <p>Email: &nbsp;<span>kingemjay3355@gmail.com</span></p>
+                        <p>Phone Number: &nbsp;<span>+27683443129</span></p>
+                        <p>Discipline: &nbsp;<span>GEOPHYSICS | Machine learning Expert</span></p>
+                    </b>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- History section -->
+        <section x-cloak>
+            <div class="row">
+                <div class="col l12 m12 s12" x-show="history">
+
+                    <table>
+                        <tr>
+                            <th><b>Username</b></th>
+                            <th><b>Employee ID</b></th>
+                        </tr>
+                        <tr>
+                            <td>Information comes here</td>
+                            <td>Information comes here</td>
+                        </tr>
+                    </table>
+                    <p style="text-align: center;"><b>FRONT-END INPUT DATA FOR ML API COMPUTATION</b></p>
+
+                    <!-- Historical inputs by the admins -->
+                    <table style="table-layout: ;">
+                        <tr>
+                            <th>tghjk</th>
+                            <th>ghgj</th>
+                        </tr>
+
+                    </table>
+
+                    <br>
+                    <p style="text-align: center;"><b>HISTORICAL COMPUTATION BY THE MULTI-MODAL ML MODEL</b></p>
+                    <!-- Numerical computation value by the machine learning model -->
+
+                    <table>
+                        <tr>
+                            <th>Jn</th>
+                            <th>Ja</th>
+                            <th>Jr</th>
+                            <th>Jw</th>
+                            <th>UCS/VSR</th>
+                            <th>RQD</th>
+                            <th>Q</th>
+                            <th>SRF</th>
+                            <th>RMR</th>
+                            <th>ESR</th>
+                            <th>MUS</th>
+                        </tr>
+                        <tr>
+                            <td>Value comes here</td>
+                            <td>Value comes here</td>
+                            <td>Value comes here</td>
+                            <td>Value comes here</td>
+                            <td>Value comes here</td>
+                            <td>Value comes here</td>
+                            <td>Value comes here</td>
+                            <td>Value comes here</td>
+                            <td>Value comes here</td>
+                            <td>Value comes here</td>
+                            <td>Value comes here</td>
+                        </tr>
+                    </table>
+
+
+                </div>
+
+            </div>
+
+        </section>
+    </main>
+
+
+    <div class="card">
+
+        <section>
+
+            <footer class="page-footer">
+
+                <div class="footer-copyright">
+                    <div class="row">
+                        <div class="col m8 l12 s12" style="text-align: center;">
+                            © 2023 Copyright Reserved<br>
+                           
+                            <a class="grey-text text-lighten-4 right" href="#!">UJ & ACCENTURE WORK READINESS
+                                PROGRAM</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </section>
+    </div>
+
+
+</html>
